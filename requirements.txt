@@ -1,0 +1,16 @@
+requests
+tqdm
+
+matplotlib
+pandas
+numpy
+
+geopandas
+networkx
+libpysal
+
+epipack
+pybind11
+SamplableSet @ git+https://github.com/gstonge/SamplableSet.git
+netwulf
+ipympl
