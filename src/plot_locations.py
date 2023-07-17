@@ -20,7 +20,7 @@ def plot_locations(df, state):
     ax.set(aspect='equal')
     fig.set_tight_layout(True)
 
-    os.makedirs("figs", exist_ok=True)
+    os.makedirs(os.path.join(basedir, "figs"), exist_ok=True)
     fig_name = f"{state}_population_locations.png" if state is not None else "population_locations.png"
     fig.savefig(os.path.join(basedir, "figs", fig_name))
 

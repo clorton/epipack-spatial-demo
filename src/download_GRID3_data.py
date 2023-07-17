@@ -21,7 +21,7 @@ def download(url):
     resp = requests.get(url, stream=True)
     logging.debug(resp.headers)
 
-    os.makedirs("data", exist_ok=True)
+    os.makedirs(os.path.join(basedir, "data"), exist_ok=True)
     fname = os.path.join(basedir, "data", filename_from_header(resp.headers['Content-Disposition']))
 
     total = int(resp.headers.get('content-length', 0))
