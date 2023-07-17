@@ -1,12 +1,7 @@
-parse:
-  state: "Jigawa"
-plot:
-  state: "Jigawa"
+state: Jigawa
 configure:
-  state: "Jigawa"
   knn: 3
 simulate:
-  state: "Jigawa"
   eta: 10.0
   rho: 1.0
   omega: 0.2

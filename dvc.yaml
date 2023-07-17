@@ -6,25 +6,25 @@ stages:
       - data/GRID3_Nigeria_Settlement_Extents_Version_01.02..geojson
       - src/parse_settlements.py
     params:
-      - parse.state
+      - state
     outs:
-      - data/parsed
+      - data/parsed/${state}_population_locations.csv
   plot:
     cmd: python3 src/plot_locations.py
     deps:
-      - data/parsed/Jigawa_population_locations.csv
+      - data/parsed/${state}_population_locations.csv
       - src/plot_locations.py
     params:
-      - plot.state
+      - state
     plots:
-      - figs/Jigawa_population_locations.png
+      - figs/${state}_population_locations.png
   configure:
     cmd: python3 src/configure_network.py
     deps:
-      - data/parsed/Jigawa_population_locations.csv
+      - data/parsed/${state}_population_locations.csv
       - src/configure_network.py
     params:
-      - configure.state
+      - state
       - configure.knn
     outs:
-      - data/configured
+      - data/configured/${state}_knn_graph.json

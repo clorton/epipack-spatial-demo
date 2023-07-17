@@ -63,7 +63,7 @@ def generate_network(df, state, k):
     
     """ Adapted from https://networkx.org/documentation/stable/auto_examples/geospatial/plot_points.html """
 
-    if state is not None:
+    if state != "Nigeria":
         df = df[df.adm1_name==state]  # clip to boundary shape (not just bbox)
 
     df = df[df.population > 0]  # drop NaN population nodes
@@ -91,10 +91,8 @@ def generate_network(df, state, k):
     # https://netwulf.readthedocs.io/en/latest/python_api/data_io.html
     # stylized_network, config = nw.visualize(repair_graph(knn_graph))
 
-    os.makedirs(os.path.join(basedir, "data", "configured"), exist_ok=True)
-    
-    output_name = f"{state}_knn_graph.json" if state is not None else "knn_graph.json"
-    nw.save(os.path.join(basedir, "data", "configured", output_name), stylized_network, config)
+    os.makedirs(os.path.join(basedir, "data", "configured"), exist_ok=True)    
+    nw.save(os.path.join(basedir, "data", "configured", f"{state}_knn_graph.json"), stylized_network, config)
 
 
 if __name__ == '__main__':
@@ -104,11 +102,10 @@ if __name__ == '__main__':
     params = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["configure"]
 
     # state = "Jigawa"
-    # state = None
-    state = params["state"]
+    # state = "Nigeria"
+    state = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["state"]
 
-    location_file = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
-
+    location_file = f"{state}_population_locations.csv"
     df = pd.read_csv(os.path.join(basedir, "data", "parsed", location_file), index_col=0)
     logging.debug(df.head())
 

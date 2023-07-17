@@ -42,8 +42,9 @@ if __name__ == "__main__":
 
     params = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["simulate"]
     
-    state = params["state"]
-    network_filename = f"{state}_knn_graph.json" if state is not None else "knn_graph.json"
-    network, _, __ = nw.load(os.path.join(basedir, 'data', 'configured', network_filename))
+    # state = "Jigawa"
+    # state = "Nigeria"
+    state = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["state"]
 
+    network, _, __ = nw.load(os.path.join(basedir, 'data', 'configured', f"{state}_knn_graph.json"))
     run_SIRS(network, params)
