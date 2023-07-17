@@ -16,7 +16,7 @@ stages:
       - src/plot_locations.py
     params:
       - plot.state
-    outs:
+    plots:
       - figs/Jigawa_population_locations.png
   configure:
     cmd: python3 src/configure_network.py
