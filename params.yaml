@@ -1,4 +1,4 @@
-state: Nigeria
+state: Jigawa
 configure:
   knn: 3
 simulate:
