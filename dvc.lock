@@ -17,38 +17,38 @@ stages:
       size: 1929
     params:
       params.yaml:
-        state: Jigawa
+        state: Nigeria
     outs:
-    - path: data/parsed/Jigawa_population_locations.csv
+    - path: data/parsed/Nigeria_population_locations.csv
       hash: md5
-      md5: 632505fcb000b12c6ac60d7d86550e8f
-      size: 15467722
+      md5: 04ba975323ea5f0fcc1a33471c8adc4f
+      size: 114942861
   plot:
     cmd: python3 src/plot_locations.py
     deps:
-    - path: data/parsed/Jigawa_population_locations.csv
+    - path: data/parsed/Nigeria_population_locations.csv
       hash: md5
-      md5: 632505fcb000b12c6ac60d7d86550e8f
-      size: 15467722
+      md5: 04ba975323ea5f0fcc1a33471c8adc4f
+      size: 114942861
     - path: src/plot_locations.py
       hash: md5
       md5: 41ebaf2c9b7d33488a56c7930fcb1274
       size: 1206
     params:
       params.yaml:
-        state: Jigawa
+        state: Nigeria
     outs:
-    - path: figs/Jigawa_population_locations.png
+    - path: figs/Nigeria_population_locations.png
       hash: md5
-      md5: fe884748501b432161e7e831cf15f3de
-      size: 235759
+      md5: a21f38954758f6c4866102f0be17da4e
+      size: 207676
   configure:
     cmd: python3 src/configure_network.py
     deps:
-    - path: data/parsed/Jigawa_population_locations.csv
+    - path: data/parsed/Nigeria_population_locations.csv
       hash: md5
-      md5: 632505fcb000b12c6ac60d7d86550e8f
-      size: 15467722
+      md5: 04ba975323ea5f0fcc1a33471c8adc4f
+      size: 114942861
     - path: src/configure_network.py
       hash: md5
       md5: c29f7617ee54cd51e6727d7fb2772bd4
@@ -56,9 +56,9 @@ stages:
     params:
       params.yaml:
         configure.knn: 3
-        state: Jigawa
+        state: Nigeria
     outs:
-    - path: data/configured/Jigawa_knn_graph.json
+    - path: data/configured/Nigeria_knn_graph.json
       hash: md5
-      md5: 63c05e0aa81c349210ec53ee76978ac7
-      size: 1854550
+      md5: c5082d7001aecec2e581c0c411c6053f
+      size: 40174942
