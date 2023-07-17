@@ -6,7 +6,7 @@
 
 ## Simulation configuration pipeline
 
-* `src/generate_network.py` Build a k-nearest-neighbors directed graph and store in netwulf-readable formatting
-* `src/run_SIRS.py` Simulate + visualize (in real time with epipack) a settlement-scale SIRS model of sustained transmission (example below)
+* `src/configure_network.py` Build a k-nearest-neighbors directed graph and store in netwulf-readable formatting
+* `src/simulate_SIRS.py` Simulate + visualize (in real time with epipack) a settlement-scale SIRS model of sustained transmission (example below)
 
 ![Jigawa GRID3 kNN SIRS](docs/Jigawa_GRID3_knn_SIRS.gif)

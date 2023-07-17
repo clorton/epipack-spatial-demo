@@ -36,3 +36,21 @@ stages:
     - path: figs/Jigawa_population_locations.png
       md5: fe884748501b432161e7e831cf15f3de
       size: 235759
+  configure:
+    cmd: python3 src/configure_network.py
+    deps:
+    - path: data/parsed/Jigawa_population_locations.csv
+      md5: 632505fcb000b12c6ac60d7d86550e8f
+      size: 15467722
+    - path: src/configure_network.py
+      md5: 0e854b786ff8b06fe3fdb3ff19cca193
+      size: 4083
+    params:
+      params.yaml:
+        configure.knn: 3
+        configure.state: Jigawa
+    outs:
+    - path: data/configured
+      md5: 649a3337d03932c69e182d976fdb4a14.dir
+      size: 1854550
+      nfiles: 1

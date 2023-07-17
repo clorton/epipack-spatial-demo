@@ -2,3 +2,6 @@ parse:
   state: "Jigawa"
 plot:
   state: "Jigawa"
+configure:
+  state: "Jigawa"
+  knn: 3

@@ -8,6 +8,7 @@ import geopandas as gpd
 from libpysal import weights
 import networkx as nx
 import netwulf as nw
+import yaml
 
 
 basedir = os.path.join(os.path.dirname(__file__), "..")
@@ -58,7 +59,7 @@ def visualize(G):
     return stylized_network, config
 
 
-def generate_network(df, state):
+def generate_network(df, state, k):
     
     """ Adapted from https://networkx.org/documentation/stable/auto_examples/geospatial/plot_points.html """
 
@@ -73,7 +74,7 @@ def generate_network(df, state):
     coordinates = np.column_stack((gdf.geometry.x, gdf.geometry.y))
 
     ## k-nearest-neighbor graph
-    knn_graph = weights.KNN.from_dataframe(gdf, k=3).to_networkx()
+    knn_graph = weights.KNN.from_dataframe(gdf, k=k).to_networkx()
     nx.set_node_attributes(knn_graph, dict(zip(knn_graph.nodes, coordinates[:, 0])), 'x')
     nx.set_node_attributes(knn_graph, dict(zip(knn_graph.nodes, coordinates[:, 1])), 'y')
     nx.set_node_attributes(knn_graph, dict(zip(knn_graph.nodes, gdf.population)), 'pop')
@@ -90,22 +91,27 @@ def generate_network(df, state):
     # https://netwulf.readthedocs.io/en/latest/python_api/data_io.html
     # stylized_network, config = nw.visualize(repair_graph(knn_graph))
 
+    os.makedirs(os.path.join(basedir, "data", "configured"), exist_ok=True)
+    
     output_name = f"{state}_knn_graph.json" if state is not None else "knn_graph.json"
-    nw.save(os.path.join(basedir, "data", output_name), stylized_network, config)
+    nw.save(os.path.join(basedir, "data", "configured", output_name), stylized_network, config)
 
 
 if __name__ == '__main__':
 
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
+    params = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["configure"]
+
     # state = "Jigawa"
-    state = None
+    # state = None
+    state = params["state"]
 
     location_file = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
 
     df = pd.read_csv(os.path.join(basedir, "data", "parsed", location_file), index_col=0)
     logging.debug(df.head())
 
-    generate_network(df, state)
+    generate_network(df, state, k=params["knn"])
 
     plt.show()
