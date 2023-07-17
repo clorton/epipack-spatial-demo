@@ -5,3 +5,10 @@ plot:
 configure:
   state: "Jigawa"
   knn: 3
+simulate:
+  state: "Jigawa"
+  eta: 10.0
+  rho: 1.0
+  omega: 0.2
+  I_initial: 50
+  R_initial_fraction: 0.2

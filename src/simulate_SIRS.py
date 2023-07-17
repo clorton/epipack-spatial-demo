@@ -3,19 +3,20 @@ import os
 import epipack as epk
 from epipack.vis import visualize
 import netwulf as nw
+import yaml
 
 
-def run_SIRS(network):
+def run_SIRS(network, params):
 
     N = len(network['nodes'])
     links = [ (l['source'], l['target'], 1.0) for l in network['links'] ]
 
-    eta = 10.0
-    rho = 1.0
-    omega = 0.2
+    eta = params["eta"]
+    rho = params["rho"]
+    omega = params["omega"]
 
-    I_0 = 50
-    R_0 = int(0.2 * N)
+    I_0 = params["I_initial"]
+    R_0 = int(params["R_initial_fraction"] * N)
 
     S, I, R = list("SIR")
     model = epk.StochasticEpiModel([S, I, R], N, links)\
@@ -39,7 +40,10 @@ if __name__ == "__main__":
 
     basedir = os.path.join(os.path.dirname(__file__), "..")
 
-    # network, _, __ = nw.load(os.path.join(basedir, 'data', 'configured', 'knn_graph.json'))
-    network, _, __ = nw.load(os.path.join(basedir, 'data', 'configured', 'Jigawa_knn_graph.json'))
+    params = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["simulate"]
+    
+    state = params["state"]
+    network_filename = f"{state}_knn_graph.json" if state is not None else "knn_graph.json"
+    network, _, __ = nw.load(os.path.join(basedir, 'data', 'configured', network_filename))
 
-    run_SIRS(network)
+    run_SIRS(network, params)
