@@ -4,53 +4,41 @@ stages:
     cmd: python3 src/parse_settlements.py
     deps:
     - path: data/GRID3_Nigeria_-_State_Boundaries.geojson
+      hash: md5
       md5: 273904cf499e591a646425ca372ed238
       size: 2301331
     - path: data/GRID3_Nigeria_Settlement_Extents_Version_01.02..geojson
+      hash: md5
       md5: 6057f411647dc3ecb64d88c56f8f3228
       size: 3397971950
     - path: src/parse_settlements.py
-      md5: 2535d5720caf64b707584930e4da9010
-      size: 2006
+      hash: md5
+      md5: 4eb0dda35cd0e9e30a61100bb6610ec7
+      size: 1929
     params:
       params.yaml:
-        parse.state: Jigawa
+        state: Jigawa
     outs:
-    - path: data/parsed
-      md5: 1cce30d41d87cb8f3dcfb018b64fafb3.dir
+    - path: data/parsed/Jigawa_population_locations.csv
+      hash: md5
+      md5: 632505fcb000b12c6ac60d7d86550e8f
       size: 15467722
-      nfiles: 1
   plot:
     cmd: python3 src/plot_locations.py
     deps:
     - path: data/parsed/Jigawa_population_locations.csv
+      hash: md5
       md5: 632505fcb000b12c6ac60d7d86550e8f
       size: 15467722
     - path: src/plot_locations.py
-      md5: 02056361b80d7c21ef45e8b3604dcee7
-      size: 1395
+      hash: md5
+      md5: 41ebaf2c9b7d33488a56c7930fcb1274
+      size: 1206
     params:
       params.yaml:
-        plot.state: Jigawa
+        state: Jigawa
     outs:
     - path: figs/Jigawa_population_locations.png
+      hash: md5
       md5: fe884748501b432161e7e831cf15f3de
       size: 235759
-  configure:
-    cmd: python3 src/configure_network.py
-    deps:
-    - path: data/parsed/Jigawa_population_locations.csv
-      md5: 632505fcb000b12c6ac60d7d86550e8f
-      size: 15467722
-    - path: src/configure_network.py
-      md5: 0e854b786ff8b06fe3fdb3ff19cca193
-      size: 4083
-    params:
-      params.yaml:
-        configure.knn: 3
-        configure.state: Jigawa
-    outs:
-    - path: data/configured
-      md5: 649a3337d03932c69e182d976fdb4a14.dir
-      size: 1854550
-      nfiles: 1
