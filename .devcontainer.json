@@ -1,16 +1,16 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/universal:2",
-    "postCreateCommand": "cat requirements.txt | xargs -n 1 -L 1 pip install",
-    "customizations": {
-      "codespaces": {
-        "openFiles": [
-            "README.md"
-        ]
-      },
-      "vscode": {
-        "extensions": [
-			"ms-python.python"
-		]
-      }
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "postCreateCommand": "cat requirements.txt | xargs -n 1 -L 1 pip install",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "README.md"
+      ]
+    },
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ]
     }
   }
+}
