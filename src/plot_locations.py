@@ -4,6 +4,7 @@ import os
 import matplotlib.pyplot as plt
 from matplotlib import colors
 import pandas as pd
+import yaml
 
 
 basedir = os.path.join(os.path.dirname(__file__), "..")
@@ -29,8 +30,11 @@ if __name__ == "__main__":
 
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
-    state = "Jigawa"
+    params = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["parse"]
+
+    # state = "Jigawa"
     # state = None
+    state = params["state"]
 
     location_file = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
 

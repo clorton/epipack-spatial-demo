@@ -20,3 +20,19 @@ stages:
       md5: 1cce30d41d87cb8f3dcfb018b64fafb3.dir
       size: 15467722
       nfiles: 1
+  plot:
+    cmd: python3 src/plot_locations.py
+    deps:
+    - path: data/parsed/Jigawa_population_locations.csv
+      md5: 632505fcb000b12c6ac60d7d86550e8f
+      size: 15467722
+    - path: src/plot_locations.py
+      md5: 02056361b80d7c21ef45e8b3604dcee7
+      size: 1395
+    params:
+      params.yaml:
+        plot.state: Jigawa
+    outs:
+    - path: figs/Jigawa_population_locations.png
+      md5: fe884748501b432161e7e831cf15f3de
+      size: 235759

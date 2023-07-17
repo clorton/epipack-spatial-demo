@@ -9,3 +9,12 @@ stages:
     - parse.state
     outs:
     - data/parsed
+  plot:
+    cmd: python3 src/plot_locations.py
+    deps:
+    - data/parsed/Jigawa_population_locations.csv
+    - src/plot_locations.py
+    params:
+    - plot.state
+    outs:
+      - figs/Jigawa_population_locations.png
