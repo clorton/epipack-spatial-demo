@@ -2,6 +2,7 @@ import logging
 import os
 
 import geopandas as gpd
+import yaml
 
 
 basedir = os.path.join(os.path.dirname(__file__), "..")
@@ -50,11 +51,16 @@ if __name__ == "__main__":
     # BIG file: takes ~1 minute to load + more to parse
     filepath = "GRID3_Nigeria_Settlement_Extents_Version_01.02..geojson"
     
+    params = yaml.safe_load(open(os.path.join(basedir, "params.yaml")))["parse"]
+
     # state = None
-    state = "Jigawa"
+    # state = "Jigawa"
+    state = params["state"]
 
     gdf = load(filepath, state=state)
     calculate_centroids(gdf)
 
+    os.makedirs(os.path.join(basedir, "data", "parsed"), exist_ok=True)
+
     outfile = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
-    gdf[["x", "y", "population", "adm1_name", "adm2_name", "type"]].to_csv(os.path.join(basedir, "data", outfile))
+    gdf[["x", "y", "population", "adm1_name", "adm2_name", "type"]].to_csv(os.path.join(basedir, "data", "parsed", outfile))

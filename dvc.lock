@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  parse:
+    cmd: python3 src/parse_settlements.py
+    deps:
+    - path: data/GRID3_Nigeria_-_State_Boundaries.geojson
+      md5: 273904cf499e591a646425ca372ed238
+      size: 2301331
+    - path: data/GRID3_Nigeria_Settlement_Extents_Version_01.02..geojson
+      md5: 6057f411647dc3ecb64d88c56f8f3228
+      size: 3397971950
+    - path: src/parse_settlements.py
+      md5: 2535d5720caf64b707584930e4da9010
+      size: 2006
+    params:
+      params.yaml:
+        parse.state: Jigawa
+    outs:
+    - path: data/parsed
+      md5: 1cce30d41d87cb8f3dcfb018b64fafb3.dir
+      size: 15467722
+      nfiles: 1

@@ -1,0 +1,11 @@
+stages:
+  parse:
+    cmd: python3 src/parse_settlements.py
+    deps:
+    - data/GRID3_Nigeria_-_State_Boundaries.geojson
+    - data/GRID3_Nigeria_Settlement_Extents_Version_01.02..geojson
+    - src/parse_settlements.py
+    params:
+    - parse.state
+    outs:
+    - data/parsed

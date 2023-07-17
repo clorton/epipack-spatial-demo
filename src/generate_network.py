@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     location_file = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
 
-    df = pd.read_csv(os.path.join(basedir, "data", location_file), index_col=0)
+    df = pd.read_csv(os.path.join(basedir, "data", "parsed", location_file), index_col=0)
     logging.debug(df.head())
 
     generate_network(df, state)
