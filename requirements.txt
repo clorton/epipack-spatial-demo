@@ -1,6 +1,8 @@
 requests
 tqdm
+
 pyyaml
+dvc>=3.0
 
 matplotlib
 pandas
