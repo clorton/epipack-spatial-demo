@@ -4,6 +4,9 @@ import os
 import geopandas as gpd
 
 
+basedir = os.path.join(os.path.dirname(__file__), "..")
+
+
 def load(filepath, state=None):
     """
     Load GeoJSON into geopandas.DataFrame optionally masking by adm1_name shapefile.
@@ -13,7 +16,7 @@ def load(filepath, state=None):
     mask = None
 
     if state is not None:
-        state_shapes = gpd.read_file(os.path.join("data", "GRID3_Nigeria_-_State_Boundaries.geojson"))
+        state_shapes = gpd.read_file(os.path.join(basedir, "data", "GRID3_Nigeria_-_State_Boundaries.geojson"))
 
         logging.debug(state_shapes.columns)
         logging.debug(state_shapes.head())
@@ -21,7 +24,7 @@ def load(filepath, state=None):
 
         mask = state_shapes[state_shapes.statename == state]
 
-    gdf = gpd.read_file(os.path.join("data", filepath), mask=mask)
+    gdf = gpd.read_file(os.path.join(basedir, "data", filepath), mask=mask)
 
     logging.debug(gdf.columns)
     logging.debug(gdf.head())
@@ -54,4 +57,4 @@ if __name__ == "__main__":
     calculate_centroids(gdf)
 
     outfile = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
-    gdf[["x", "y", "population", "adm1_name", "adm2_name", "type"]].to_csv(os.path.join("data", outfile))
+    gdf[["x", "y", "population", "adm1_name", "adm2_name", "type"]].to_csv(os.path.join(basedir, "data", outfile))

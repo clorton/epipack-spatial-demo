@@ -6,6 +6,9 @@ import requests
 from tqdm import tqdm
 
 
+basedir = os.path.join(os.path.dirname(__file__), "..")
+
+
 def filename_from_header(h):
     # Note cgi deprectation: https://peps.python.org/pep-0594/#cgi
     m = email.message.Message()
@@ -19,7 +22,7 @@ def download(url):
     logging.debug(resp.headers)
 
     os.makedirs("data", exist_ok=True)
-    fname = os.path.join("data", filename_from_header(resp.headers['Content-Disposition']))
+    fname = os.path.join(basedir, "data", filename_from_header(resp.headers['Content-Disposition']))
 
     total = int(resp.headers.get('content-length', 0))
     with open(fname, 'wb') as file, tqdm(

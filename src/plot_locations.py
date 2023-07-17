@@ -6,6 +6,9 @@ from matplotlib import colors
 import pandas as pd
 
 
+basedir = os.path.join(os.path.dirname(__file__), "..")
+
+
 def plot_locations(df, state):
     
     fig, ax = plt.subplots(1, 1)
@@ -19,7 +22,7 @@ def plot_locations(df, state):
 
     os.makedirs("figs", exist_ok=True)
     fig_name = f"{state}_population_locations.png" if state is not None else "population_locations.png"
-    fig.savefig(os.path.join("figs", fig_name))
+    fig.savefig(os.path.join(basedir, "figs", fig_name))
 
 
 if __name__ == "__main__":
@@ -31,7 +34,7 @@ if __name__ == "__main__":
 
     location_file = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
 
-    df = pd.read_csv(os.path.join("data", location_file), index_col=0)
+    df = pd.read_csv(os.path.join(basedir, "data", location_file), index_col=0)
     logging.debug(df.head())
 
     plot_locations(df, state)

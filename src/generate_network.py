@@ -10,6 +10,9 @@ import networkx as nx
 import netwulf as nw
 
 
+basedir = os.path.join(os.path.dirname(__file__), "..")
+
+
 def repair_graph(G_in):
     """ 
     _json_default only converts np.int64 and np.float64
@@ -88,7 +91,7 @@ def generate_network(df, state):
     # stylized_network, config = nw.visualize(repair_graph(knn_graph))
 
     output_name = f"{state}_knn_graph.json" if state is not None else "knn_graph.json"
-    nw.save(os.path.join("data", output_name), stylized_network, config)
+    nw.save(os.path.join(basedir, "data", output_name), stylized_network, config)
 
 
 if __name__ == '__main__':
@@ -100,7 +103,7 @@ if __name__ == '__main__':
 
     location_file = f"{state}_population_locations.csv" if state is not None else "population_locations.csv"
 
-    df = pd.read_csv(os.path.join("data", location_file), index_col=0)
+    df = pd.read_csv(os.path.join(basedir, "data", location_file), index_col=0)
     logging.debug(df.head())
 
     generate_network(df, state)

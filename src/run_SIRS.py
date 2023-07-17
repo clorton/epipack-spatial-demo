@@ -37,7 +37,9 @@ def run_SIRS(network):
 
 if __name__ == "__main__":
 
-    # network, _, __ = nw.load(os.path.join('data', 'knn_graph.json'))
-    network, _, __ = nw.load(os.path.join('data', 'Jigawa_knn_graph.json'))
+    basedir = os.path.join(os.path.dirname(__file__), "..")
+
+    # network, _, __ = nw.load(os.path.join(basedir, 'data', 'knn_graph.json'))
+    network, _, __ = nw.load(os.path.join(basedir, 'data', 'Jigawa_knn_graph.json'))
 
     run_SIRS(network)
