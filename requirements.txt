@@ -3,6 +3,7 @@ tqdm
 
 pyyaml
 dvc>=3.0
+dvc_azure
 
 matplotlib
 pandas
