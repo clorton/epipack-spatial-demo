@@ -1,4 +1,11 @@
 stages:
+  # download:
+  #   cmd: python3 src/download_GRID3_data.py --nowarn
+  #   deps:
+  #     - src/download_GRID3_data.py
+  #   outs:
+  #     - data/GRID3_Nigeria_-_State_Boundaries.geojson
+  #     - data/GRID3_Nigeria_Settlement_Extents_Version_01.02..geojson
   parse:
     cmd: python3 src/parse_settlements.py
     deps:
