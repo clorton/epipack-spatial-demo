@@ -1,3 +1,4 @@
+import argparse
 import email
 import logging
 import os
@@ -43,25 +44,44 @@ if __name__ == '__main__':
 
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
+    parser = argparse.ArgumentParser(
+        prog="download_GRID3_data",
+        description="Downloads GeoJSON files from GRID3")
+    
+    parser.add_argument('--nowarn', 
+                        action='store_true')
+    
+    args = parser.parse_args()
+
     datasets = []
 
     # ########################################################
     # # Dataset: Nigeria Settlement Extents Version 01.02
     # # Explore at https://data.grid3.org/datasets/1cbdf89be31f4ebfac304c352c700ee9_0
     # # GeoJSON: 3.4 GB (976.0 MB gzip)
-    # datasets += ["1cbdf89be31f4ebfac304c352c700ee9_0"]
-
-    # ########################################################
-    # # Dataset: Nigeria Settlement Points
-    # # Explore at https://data.grid3.org/datasets/GRID3::nigeria-settlement-points
-    # # GeoJSON: 157.8 MB (28.3 MB gzip)
-    # datasets += ["73d8522d1c4d4c75be6c10fa790c685c_0"]
+    datasets += ["1cbdf89be31f4ebfac304c352c700ee9_0"]
 
     ########################################################
     # Dataset: Nigeria - State Boundaries
     # Explore at https://data.grid3.org/datasets/GRID3::nigeria-state-boundaries/explore
     # GeoJSON: 2.3 MB (734.7 KB gzip)
     datasets += ["c41532b720504f4799fe20438b7e3b7f_0"]
+
+    logging.info("Datasets to download:\n\t%s", "\n\t".join(datasets))
+
+    if not args.nowarn:
+        while True:
+            user_input = input("Are you sure you want to download several GBs worth of GeoJSON files? (y/n)")
+            if user_input.lower() == "y":
+                break
+            elif user_input.lower() == "n":
+                logging.info("Canceling large-file downloads...")
+                import sys
+                sys.exit()
+            else:
+                print("Type 'y' or 'n'")
+
+    logging.info("Downloading...")
 
     format = "geojson"
     for dataset in datasets:
