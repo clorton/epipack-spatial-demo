@@ -1,2 +1,8 @@
+# Apple Stuff
 .DS_Store
+
+# Temporary files
 dvc_plots/
+
+# Python virtual environment
+.venv/
