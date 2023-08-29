@@ -7,3 +7,4 @@ simulate:
   omega: 0.2
   I_initial: 50
   R_initial_fraction: 0.2
+  kappa: 0.333
